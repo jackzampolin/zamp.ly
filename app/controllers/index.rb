@@ -19,7 +19,7 @@ end
 
 get '/urls/:id' do
   @url = Url.where(id: params[:id]).first
-  @short = "http://zamp.ly.com/#{@url.short}"
+  @short = "https://zamply.herokuapp.com/#{@url.short}"
   erb :'url_id_page'
 end
 
