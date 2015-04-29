@@ -13,9 +13,16 @@ require 'shoulda-matchers'
 require 'rack/test'
 require 'capybara'
 require 'capybara/rspec'
+require 'faker'
+require 'pry-byebug'
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods
+end
+
+before do
+  Url.delete_all
+  5.times do Url.create!(path: Faker::Internet.url) end
 end
 
 def app

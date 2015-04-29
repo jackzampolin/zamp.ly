@@ -13,7 +13,7 @@
 
 We're going to build a simple link shortener, a la [bitly][].
 
-You'll have one model named `Url`. The table for this model stores a list of 
+You'll have one model named `Url`. The table for this model stores a list of
 URLs that people have entered.
 
 ## Releases
@@ -25,16 +25,16 @@ Start with the empty Sinatra skeleton.
 We have one resource: `Urls`.  For our controllers, we have a route that lists
 `Url` objects and another route that, when POSTed to, creates a `Url` object.
 
-Let's test-drive these routes! 
+Let's test-drive these routes!
 
-Create a file in the `spec/` directory that corresponds to your controller. 
-Maybe call it something like `index_controller_spec.rb`. Open this file in your 
+Create a file in the `spec/` directory that corresponds to your controller.
+Maybe call it something like `index_controller_spec.rb`. Open this file in your
 editor and write a controller spec for `GET /urls` using the syntax provided by
 [rack-test][]. The [Sinatra testing documentation][] also has documentation
 about how to test a controller.
 
 Write a failing test first. After you've made it pass by implementing the route,
-write a failing test for the `POST /urls` route. Keep the 
+write a failing test for the `POST /urls` route. Keep the
 
 1. Given
 2. When
@@ -50,11 +50,11 @@ describe "index_controller" do
 end
 ```
 
-We'll also need a route that redirects us to the full (unshortened) URL. As 
-always, write a test first.  If you've never used bitly, use it now to get a 
+We'll also need a route that redirects us to the full (unshortened) URL. As
+always, write a test first.  If you've never used bitly, use it now to get a
 feel for how it works.
 
-Now that you've written tested controllers, the controller methods should look 
+Now that you've written tested controllers, the controller methods should look
 like this:
 
 ```ruby
@@ -74,7 +74,7 @@ end
 
 Use a `before_save` callback in the `Url` model to generate the short URL.
 **Write a test** for the model method you created that generates the short URL,
-but don't worry about testing that the `before_save` callback fires. We'll trust 
+but don't worry about testing that the `before_save` callback fires. We'll trust
 that ActiveRecord has been thoroughly tested.
 
 ### Release 1:  Add a Counter!
@@ -82,7 +82,7 @@ that ActiveRecord has been thoroughly tested.
 Add a `click_count` field to your `urls` table, which keeps track of how many
 times someone has visited the shortened URL.  Add code to the appropriate place
 in your controller code so that any time someone hits a short URL the counter
-for the appropriate `Url` is incremented by 1. You can (and should) also write 
+for the appropriate `Url` is incremented by 1. You can (and should) also write
 a test for this.
 
 ### Release 2: User Authentication
@@ -96,9 +96,9 @@ a URL, this `Url` should now be associated with their user account.  In other wo
 a `Url` belongs to a `User` and a `User` has many `Urls`.
 
 **Note**: Don't worry about implement the above user-centric logic yet.  First
-get all the URL shortening and user authentication code working.  **Feel free to 
-spike on this** and forego TDD while you figure out user authentication, we'll 
-come back to repair broken tests in a bit. Make sure people can log in and can 
+get all the URL shortening and user authentication code working.  **Feel free to
+spike on this** and forego TDD while you figure out user authentication, we'll
+come back to repair broken tests in a bit. Make sure people can log in and can
 shorten URLs regardless of whether they're logged in or not.
 
 There's going to be a lot going on in your controller! Try to keep the code as
@@ -132,9 +132,9 @@ get '/users/:id' do
 end
 ```
 
-This should display a user's profile, which lists all the links that a 
-particular user has created.  If I'm viewing my *own* profile page, show the 
-number of clicks next to each link so I can see how awesome my link-sharing 
+This should display a user's profile, which lists all the links that a
+particular user has created.  If I'm viewing my *own* profile page, show the
+number of clicks next to each link so I can see how awesome my link-sharing
 skills are.
 
 Since you'll be checking the session in every route, your routes are probably pretty
@@ -167,7 +167,7 @@ to determine what user created a short URL.
 ### Release 4: Fix Your Broken Tests and Write New Ones!
 All of this dynamic content has probably caused your tests to break. But that's
 ok! They can be fixed! You can fake a user's session using rack-test. The 'GET'
-and 'POST' methods take an optional third argument that corresponds to the 
+and 'POST' methods take an optional third argument that corresponds to the
 rack environment hash (where information about sessions is stored). It looks
 something like this:
 
@@ -187,9 +187,9 @@ that correspond to user authentication.
 
 ### Release 5: Add Validations (Optional)
 
-Test-drive adding a validation to your `Url` model so that only `Urls` with 
+Test-drive adding a validation to your `Url` model so that only `Urls` with
 valid URLs are saved to the database. Read up on [ActiveRecord validations][].
-You can use ActiveRecord's `valid?` instance method in your test to check if 
+You can use ActiveRecord's `valid?` instance method in your test to check if
 the validations are working.
 
 What constitutes a "valid URL" is up to you.  It's a sliding scale, from
