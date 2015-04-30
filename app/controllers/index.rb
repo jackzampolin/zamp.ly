@@ -26,5 +26,6 @@ end
 get '/:short' do
   @url = Url.where(short: params[:short]).first
   @url.click_count += 1
+  @url.save
   redirect @url.path
 end
