@@ -1,5 +1,5 @@
 class Url < ActiveRecord::Base
-
+  has_many :clicks
   validates :path, presence: true
   validates :short, uniqueness: true
 

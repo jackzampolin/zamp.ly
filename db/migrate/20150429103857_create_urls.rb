@@ -3,7 +3,7 @@ class CreateUrls < ActiveRecord::Migration
     create_table :urls do |t|
       t.string :path
       t.string :short
-      t.integer :click_count, default: 0
+      t.references :click
 
       t.timestamps
     end
